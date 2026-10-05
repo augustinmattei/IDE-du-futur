@@ -1,2 +1,14 @@
+# Binaries
+/build/
 *.o
-a.out
+StumperIDE
+
+#Build related
+/_deps/
+/CMakeFiles/
+src/CMakeFiles
+/bin/
+*.cmake
+compile_commands.json
+CMakeCache.txt
+*Makefile
