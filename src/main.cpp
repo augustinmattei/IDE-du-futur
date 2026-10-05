@@ -1,3 +1,7 @@
+#include "../include/StumperIDE.hpp"
+
 int main() {
-    return 42;
+    StumperIDE::MainWindow mainWindow;
+
+    mainWindow.Run();
 }
