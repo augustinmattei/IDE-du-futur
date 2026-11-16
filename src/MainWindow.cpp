@@ -23,7 +23,7 @@ void StumperIDE::MainWindow::Run()
     auto mainComponent = ftxui::Renderer(layout, [&] {
         return ftxui::hbox({
             _mainElement._document->Render()
-        }) | ftxui::xflex | ftxui::size(ftxui::WIDTH, ftxui::GREATER_THAN, 40) | ftxui::border;
+        }) | ftxui::xflex | ftxui::border;
     });
 
     _mainWindow.Loop(mainComponent);

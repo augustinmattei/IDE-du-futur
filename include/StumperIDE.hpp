@@ -1,3 +1,5 @@
+#pragma once
+
 #include <ftxui/component/app.hpp>
 #include <ftxui/dom/elements.hpp>
 #include <ftxui/screen/screen.hpp>
