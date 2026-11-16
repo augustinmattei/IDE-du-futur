@@ -4,4 +4,5 @@ int main() {
     StumperIDE::MainWindow mainWindow;
 
     mainWindow.Run();
+    return 0;
 }
