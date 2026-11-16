@@ -4,3 +4,11 @@ StumperIDE
 
 #Build related
 /build/
+/_deps/
+/CMakeFiles/
+src/CMakeFiles
+/bin/
+*.cmake
+compile_commands.json
+CMakeCache.txt
+*Makefile
