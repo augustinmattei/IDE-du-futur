@@ -1,1 +1,23 @@
-#include <stdio.h>
+#pragma once
+
+#include <ftxui/component/app.hpp>
+#include <ftxui/dom/elements.hpp>
+#include <ftxui/screen/screen.hpp>
+#include "FileNavBar.hpp"
+#include "TextEditingZone.hpp"
+#include "FileSelectorZone.hpp"
+
+namespace StumperIDE
+{
+    class MainWindow {
+        private:
+            FileNavBar _fileNavBar;
+            TextEditingZone _textEditingZone;
+            FileSelectorZone _fileSelectorZone;
+            ftxui::App _mainWindow;
+
+        public:
+            MainWindow();
+            void Run();
+    };
+}

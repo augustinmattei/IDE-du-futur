@@ -1,9 +1,9 @@
 # Binaries
-/build/
 *.o
 StumperIDE
 
 #Build related
+/build/
 /_deps/
 /CMakeFiles/
 src/CMakeFiles
