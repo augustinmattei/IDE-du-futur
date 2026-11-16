@@ -5,10 +5,10 @@
 #include <ftxui/dom/node.hpp>
 #include <ftxui/screen/screen.hpp>
 
-StumperIDE::MainWindow::MainWindow() : _mainWindow(ftxui::App::Fullscreen()), _mainElement({
-        "Test 1",
-        "Test 2",
-        "Test 3"
+StumperIDE::MainWindow::MainWindow() : _mainWindow(ftxui::App::Fullscreen()), _fileNavBar({
+        "Placeholder 1",
+        "Placeholder 2",
+        "Placeholder 3"
     })
 {
 
@@ -16,14 +16,18 @@ StumperIDE::MainWindow::MainWindow() : _mainWindow(ftxui::App::Fullscreen()), _m
 
 void StumperIDE::MainWindow::Run()
 {
-    auto layout = ftxui::Container::Horizontal({
-        _mainElement._document
+    auto layout = ftxui::Container::Vertical({
+        _fileNavBar.Toggle,
+        ftxui::Container::Horizontal({_textEditingZone.TextZone, _fileSelectorZone.FileSelector})
     });
 
     auto mainComponent = ftxui::Renderer(layout, [&] {
-        return ftxui::hbox({
-            _mainElement._document->Render()
-        }) | ftxui::xflex | ftxui::border;
+        return ftxui::vbox({
+            _fileNavBar.Toggle->Render() | ftxui::border,
+            ftxui::hbox(_textEditingZone.TextZone->Render() | ftxui::border,
+                            _fileSelectorZone.FileSelector->Render())
+                            | ftxui::yflex
+        });
     });
 
     _mainWindow.Loop(mainComponent);

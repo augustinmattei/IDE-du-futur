@@ -3,12 +3,17 @@
 #include <ftxui/component/app.hpp>
 #include <ftxui/dom/elements.hpp>
 #include <ftxui/screen/screen.hpp>
-#include "document.hpp"
+#include "FileNavBar.hpp"
+#include "TextEditingZone.hpp"
+#include "FileSelectorZone.hpp"
 
-namespace StumperIDE {
+namespace StumperIDE
+{
     class MainWindow {
         private:
-            Document _mainElement;
+            FileNavBar _fileNavBar;
+            TextEditingZone _textEditingZone;
+            FileSelectorZone _fileSelectorZone;
             ftxui::App _mainWindow;
 
         public:
