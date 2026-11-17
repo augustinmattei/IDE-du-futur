@@ -6,3 +6,8 @@ StumperIDE::TextEditingZone::TextEditingZone()
 
     TextZone = ftxui::Input(&_file_text, "");
 }
+
+void StumperIDE::TextEditingZone::DisplayText(std::string ToDisplay)
+{
+    _file_text = ToDisplay;
+}

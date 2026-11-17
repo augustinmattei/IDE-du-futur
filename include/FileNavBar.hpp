@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <ftxui/component/app.hpp>
+#include <ftxui/component/component.hpp>
 
 namespace StumperIDE
 {
@@ -15,5 +16,7 @@ namespace StumperIDE
             ftxui::Component Toggle;
 
             FileNavBar(const std::vector<std::string> Entries);
+
+            std::string OpenSelectedFile(const std::string Filename);
     };
 }

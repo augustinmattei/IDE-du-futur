@@ -16,8 +16,11 @@ namespace StumperIDE
             FileSelectorZone _fileSelectorZone;
             ftxui::App _mainWindow;
 
+            ftxui::Component _mainComponent;
         public:
             MainWindow();
             void Run();
-    };
+
+            void AddCloseWindowEvent(ftxui::Component &MainComponent);
+        };
 }

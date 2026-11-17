@@ -13,6 +13,9 @@ namespace StumperIDE
 
         public:
             ftxui::Component TextZone;
+
             TextEditingZone();
+
+            void DisplayText(std::string ToDisplay);
     };
 }

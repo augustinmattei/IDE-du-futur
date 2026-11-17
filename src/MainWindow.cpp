@@ -1,6 +1,7 @@
 #include "../include/StumperIDE.hpp"
 #include <ftxui/component/app.hpp>
 #include <ftxui/component/component.hpp>
+#include <ftxui/component/event.hpp>
 #include <ftxui/dom/elements.hpp>
 #include <ftxui/dom/node.hpp>
 #include <ftxui/screen/screen.hpp>
@@ -14,6 +15,17 @@ StumperIDE::MainWindow::MainWindow() : _mainWindow(ftxui::App::Fullscreen()), _f
 
 }
 
+void StumperIDE::MainWindow::AddCloseWindowEvent(ftxui::Component &MainComponent)
+{
+    MainComponent |= ftxui::CatchEvent([&](ftxui::Event event) {
+        if (event == ftxui::Event::Character('q')) {
+            _mainWindow.ExitLoopClosure()();
+            return true;
+        }
+        return false;
+    });
+}
+
 void StumperIDE::MainWindow::Run()
 {
     auto layout = ftxui::Container::Vertical({
@@ -21,7 +33,7 @@ void StumperIDE::MainWindow::Run()
         ftxui::Container::Horizontal({_textEditingZone.TextZone, _fileSelectorZone.FileSelector})
     });
 
-    auto mainComponent = ftxui::Renderer(layout, [&] {
+    _mainComponent = ftxui::Renderer(layout, [&] {
         return ftxui::vbox({
             _fileNavBar.Toggle->Render() | ftxui::border,
             ftxui::hbox(_textEditingZone.TextZone->Render() | ftxui::border,
@@ -30,5 +42,7 @@ void StumperIDE::MainWindow::Run()
         });
     });
 
-    _mainWindow.Loop(mainComponent);
+    AddCloseWindowEvent(_mainComponent);
+
+    _mainWindow.Loop(_mainComponent);
 }
