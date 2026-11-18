@@ -1,5 +1,6 @@
 #pragma once
 
+#include "SenderBase.hpp"
 #include <vector>
 #include <string>
 #include <ftxui/component/app.hpp>
@@ -7,7 +8,7 @@
 
 namespace StumperIDE
 {
-    class FileNavBar {
+    class FileNavBar : public SenderBase {
         private:
             int _file_selected;
             std::vector<std::string> _entries;

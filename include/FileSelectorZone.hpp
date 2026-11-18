@@ -6,10 +6,11 @@
 #include <ftxui/screen/screen.hpp>
 #include <string>
 #include <vector>
+#include "SenderBase.hpp"
 
 namespace StumperIDE
 {
-    class FileSelectorZone {
+    class FileSelectorZone : public SenderBase {
         private:
             int _file_selected;
             std::vector<std::string> _entries;

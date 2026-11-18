@@ -8,6 +8,6 @@ namespace StumperIDE
 
     class IMediator {
         public:
-            virtual void Notify(SenderBase *sender, std::string event) = 0;
+            virtual void Notify(SenderBase *sender, std::string event) const = 0;
     };
 }
