@@ -1,5 +1,6 @@
 #pragma once
 
+#include "SenderEvent.hpp"
 #include <string>
 
 namespace StumperIDE
@@ -8,6 +9,6 @@ namespace StumperIDE
 
     class IMediator {
         public:
-            virtual void Notify(SenderBase *sender, std::string event) const = 0;
+            virtual void Notify(SenderBase *sender, sender_event_t type, std::string file_content) const = 0;
     };
 }

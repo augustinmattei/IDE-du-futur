@@ -1,10 +1,18 @@
 #include "../include/TextEditingZone.hpp"
+#include <ftxui/component/component.hpp>
 
 StumperIDE::TextEditingZone::TextEditingZone()
 {
-    _file_text = "Lorem Ipsum Dolor Sit Amet, c'est un test si t'avais pas remarqué...";
+    _file_text = "Sélectionnez un fichier pour en afficher le contenu.";
 
     TextZone = ftxui::Input(&_file_text, "");
+
+    TextZone |= ftxui::CatchEvent([&](ftxui::Event event) {
+        if (event == ftxui::Event::Escape) {
+            return true; //TO-DO : make TextZone lose focus upon pressing esc
+        }
+        return false;
+    });
 }
 
 void StumperIDE::TextEditingZone::DisplayText(std::string ToDisplay)

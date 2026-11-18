@@ -29,9 +29,17 @@ void StumperIDE::MainWindow::AddCloseWindowEvent(ftxui::Component &MainComponent
     });
 }
 
-void StumperIDE::MainWindow::Notify(SenderBase *sender, std::string event) const
+void StumperIDE::MainWindow::Notify(SenderBase *sender, sender_event_t type, std::string file_content) const
 {
-    return;
+    switch (type) {
+        case FILE_SELECTED:
+            _fileNavBar->OpenSelectedFile(file_content);
+        case FILE_OPENED:
+        case FILE_CHANGED:
+            _textEditingZone->DisplayText(file_content);
+        default:
+            return;
+    };
 }
 
 void StumperIDE::MainWindow::Run()

@@ -12,6 +12,7 @@ namespace StumperIDE
         private:
             int _file_selected;
             std::vector<std::string> _entries;
+            std::vector<std::string> _file_contents;
 
         public:
             ftxui::Component Toggle;
