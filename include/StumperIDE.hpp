@@ -24,7 +24,6 @@ namespace StumperIDE
             void Run();
 
             void Notify(SenderBase *sender, sender_event_t type, std::string file_content) const;
-            void Notify(SenderBase *sender, sender_event_t type, int file_selected) const;
 
             void AddCloseWindowEvent(ftxui::Component &MainComponent);
         };
