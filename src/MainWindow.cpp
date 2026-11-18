@@ -18,7 +18,7 @@ StumperIDE::MainWindow::MainWindow() : _mainWindow(ftxui::App::Fullscreen()), _f
 void StumperIDE::MainWindow::AddCloseWindowEvent(ftxui::Component &MainComponent)
 {
     MainComponent |= ftxui::CatchEvent([&](ftxui::Event event) {
-        if (event == ftxui::Event::Character('q')) {
+        if (event == ftxui::Event::Character('q') && _textEditingZone.TextZone->Focused() == false) {
             _mainWindow.ExitLoopClosure()();
             return true;
         }
