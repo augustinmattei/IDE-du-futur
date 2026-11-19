@@ -1,5 +1,6 @@
 #include "../include/FileSelectorZone.hpp"
 #include <ftxui/component/component.hpp>
+#include <ftxui/component/event.hpp>
 
 StumperIDE::FileSelectorZone::FileSelectorZone()
 {
@@ -11,4 +12,12 @@ StumperIDE::FileSelectorZone::FileSelectorZone()
     };
 
     FileSelector = ftxui::Dropdown(&_entries, &_file_selected);
+
+    FileSelector |= ftxui::CatchEvent([&](ftxui::Event event) {
+        if (event == ftxui::Event::Character('\n')) {
+            _mediator->Notify(this, FILE_SELECTED, _entries[_file_selected]);
+            return true;
+        }
+        return false;
+    });
 }

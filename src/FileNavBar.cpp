@@ -20,7 +20,7 @@ StumperIDE::FileNavBar::FileNavBar(const std::vector<std::string> Entries) : _en
     });
 }
 
-std::string StumperIDE::FileNavBar::OpenSelectedFile(const std::string Filename)
+void StumperIDE::FileNavBar::OpenSelectedFile(const std::string Filename)
 {
     std::ifstream filestream(Filename);
     std::string str;
@@ -31,5 +31,9 @@ std::string StumperIDE::FileNavBar::OpenSelectedFile(const std::string Filename)
         file_content.push_back('\n');
     }
 
-    return file_content;
+    _entries.push_back(Filename);
+    _file_contents.push_back("Ceci est un test d'ouverture, j'apparais sûrement plusieurs fois");
+    _file_selected = _entries.size() - 1;
+    filestream.close();
+    _mediator->Notify(this, FILE_OPENED, _file_contents[_file_selected]);
 }

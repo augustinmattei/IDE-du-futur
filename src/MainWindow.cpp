@@ -34,9 +34,11 @@ void StumperIDE::MainWindow::Notify(SenderBase *sender, sender_event_t type, std
     switch (type) {
         case FILE_SELECTED:
             _fileNavBar->OpenSelectedFile(file_content);
+            break;
         case FILE_OPENED:
         case FILE_CHANGED:
             _textEditingZone->DisplayText(file_content);
+            break;
         default:
             return;
     };

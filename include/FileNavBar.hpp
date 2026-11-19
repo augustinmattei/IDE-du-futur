@@ -19,6 +19,6 @@ namespace StumperIDE
 
             FileNavBar(const std::vector<std::string> Entries);
 
-            std::string OpenSelectedFile(const std::string Filename);
+            void OpenSelectedFile(const std::string Filename);
     };
 }
