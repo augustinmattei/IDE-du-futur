@@ -2,6 +2,8 @@
 #include <algorithm>
 #include <cstddef>
 #include <fstream>
+#include <ftxui/component/component_base.hpp>
+#include <ftxui/component/mouse.hpp>
 #include <ftxui/dom/elements.hpp>
 #include <stdexcept>
 
@@ -68,8 +70,20 @@ ftxui::Element StumperIDE::TextEditingZone::OnRender()
             }
 
             ftxui::Element character = ftxui::text(line_content.substr(x, 1));
-            file_lines.push_back(ftxui::hbox(std::move(line_parts)));
+            if (IsCharacterSelected(x, y)) {
+                character = character | ftxui::color(ftxui::Color::Red);
+            } else {
+                character = character | ftxui::color(ftxui::Color::Black);
+            }
+            line_parts.push_back(std::move(character));
         }
+        file_lines.push_back(ftxui::hbox(std::move(line_parts)));
+    }
+
+    while (file_lines.size() < visible_height) {
+        file_lines.push_back(ftxui::hbox({
+            ftxui::text(std::string(line_number_width, ' ') + " | "),
+        }));
     }
 
     return ftxui::vbox(std::move(file_lines)) | ftxui::reflect(editorBox);
@@ -273,3 +287,37 @@ void StumperIDE::TextEditingZone::SetCursorInBufferBounds()
     cursorX = std::min(cursorX, fileText[cursorY].size());
 }
 
+bool StumperIDE::TextEditingZone::OnEvent(ftxui::Event event)
+{
+    if (event.is_mouse()) {
+        auto mouse = event.mouse();
+
+        bool inside_editor = (mouse.x >= editorBox.x_min && mouse.x <= editorBox.x_max &&
+                              mouse.y >= editorBox.y_min && mouse.y <= editorBox.y_min);
+
+        if (inside_editor) {
+            if (mouse.button == ftxui::Mouse::Left && mouse.motion == ftxui::Mouse::Pressed) {
+                TakeFocus();
+                ClearSelection();
+                return true;
+            }
+
+            if (mouse.motion != ftxui::Mouse::Pressed && mouse.motion != ftxui::Mouse::Released) {
+                return true;
+            }
+        }
+    }
+
+    if (event.is_character()) {
+        if (HasSelection()) {
+            DeleteSelection();
+        }
+        fileText[cursorY].insert(cursorX, event.input());
+        cursorX += event.input().size();
+        ClearSelection();
+        UpdateScroll();
+        return true;
+    }
+
+    return ftxui::ComponentBase::OnEvent(event);
+}

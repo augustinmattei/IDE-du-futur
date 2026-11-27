@@ -1,8 +1,8 @@
-#include "../include/StumperIDE.hpp"
+#include "../include/App.hpp"
 
 int main() {
-    StumperIDE::MainWindow mainWindow;
+    StumperIDE::StumperIDEApp app;
 
-    mainWindow.Run();
+    app.Run();
     return 0;
 }

@@ -40,7 +40,7 @@ namespace StumperIDE
             ftxui::Box editorBox;
 
         public:
-            TextEditingZone();
+            TextEditingZone(); // constructor needs a filepath for testing purposes
 
             ftxui::Element OnRender() override;
             bool OnEvent(ftxui::Event event) override;
